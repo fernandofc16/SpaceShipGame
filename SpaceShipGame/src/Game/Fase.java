@@ -106,7 +106,7 @@ public class Fase extends JPanel implements ActionListener {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
-				if(tryAgainRec.contains(e.getPoint()) && spaceShip.isAlive() == false && inGame == false) {
+				if(tryAgainRec.contains(e.getPoint()) && spaceShip.isAlive() == false && inGame == false || youWin && inGame == false) {
 					MainJanelas.mainJ.changeJPanel(MainJanelas.beginJanela);
 				}
 			}
@@ -370,7 +370,7 @@ public class Fase extends JPanel implements ActionListener {
 		grafico.drawString("Seu score: " + score, 5, 640);
 		grafico.drawString("Horda: " + horda, 5, 600);
 		grafico.drawString("Inimigos mortos: " + inimigosMortos, 5, 560);
-		
+		grafico.drawString("PLAY AGAIN", 920 , 600);
 	} else if(inGame && allEnemiesDefeat) {
 		nextHorda();
 		allEnemiesDefeat = false;
