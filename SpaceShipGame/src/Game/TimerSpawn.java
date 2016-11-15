@@ -7,7 +7,6 @@ public class TimerSpawn {
 
 	private Fase fase;
 	private int horda;
-	private int darkHoleNumber = 0, bulletsNumber = 0;
 	private Timer timerDarkHoles, timerBullets;
 	private TimerTask timerTaskDarkHoles = new TimerTask() {
 		
@@ -15,8 +14,6 @@ public class TimerSpawn {
 		public void run() {
 			if(!fase.getDarkHoleX().isEmpty() && !fase.getDarkHoleY().isEmpty() && fase.getHorda() == horda) {
 				for(int i = 0; i < fase.getHorda(); i++) {
-					darkHoleNumber++;
-					System.out.println("Número de Spawns de Buracos Negros: x" + darkHoleNumber);
 					fase.getDarkHoles().add(new DarkHole(fase.getDarkHoleX().get(0), fase.getDarkHoleY().get(0)));
 					fase.getDarkHoleX().remove(0);
 					fase.getDarkHoleY().remove(0);
@@ -33,8 +30,6 @@ public class TimerSpawn {
 		@Override
 		public void run() {
 			if(!fase.getBulletsX().isEmpty() && !fase.getBulletsY().isEmpty() && fase.getHorda() == horda) {
-				bulletsNumber++;
-				System.out.println("Número de Spawns de Munições: x" + bulletsNumber);
 				fase.getBullets().add(new Bullets(fase.getBulletsX().get(0), fase.getBulletsY().get(0)));
 				fase.getBulletsX().remove(0);
 				fase.getBulletsY().remove(0);

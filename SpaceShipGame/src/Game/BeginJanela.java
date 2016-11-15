@@ -12,7 +12,6 @@ public class BeginJanela extends JPanel {
 
 	private static final long serialVersionUID = 8277146071489360063L;
 	private Rectangle startRec = new Rectangle(800, 500, 150, 125);
-	private BeginJanela bj = this;
 	
 	public BeginJanela() {
 		addMouseListener(new MouseAdapter() {
@@ -21,8 +20,7 @@ public class BeginJanela extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
 				if(startRec.contains(e.getPoint())) {
-					System.out.println("CLICOU");
-					MainJanelas.mainJ.changeJPanel(bj);
+					MainJanelas.mainJ.changeJPanel(MainJanelas.beginJanela);
 				}
 			}
 			

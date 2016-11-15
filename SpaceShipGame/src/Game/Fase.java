@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +48,7 @@ public class Fase extends JPanel implements ActionListener {
 	private int inimigosMortos;
 	private boolean bossTime;
 	private Boss1 boss1;
+	private Rectangle tryAgainRec = new Rectangle(920 , 560, 250, 50);
 	public boolean bossAlive;
 	public boolean bossed;
 	
@@ -97,6 +100,18 @@ public class Fase extends JPanel implements ActionListener {
 		
 		timer = new Timer(5, this);
 		timer.start();
+		
+		addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				super.mouseClicked(e);
+				if(tryAgainRec.contains(e.getPoint()) && spaceShip.isAlive() == false && inGame == false) {
+					MainJanelas.mainJ.changeJPanel(MainJanelas.beginJanela);
+				}
+			}
+			
+		});
 		
 	}
 	
@@ -334,7 +349,6 @@ public class Fase extends JPanel implements ActionListener {
 	} else if(spaceShip.isAlive() == false && inGame == false) {
 		ImageIcon gameOver = new ImageIcon(this.getClass().getResource("/Images/gameOver.png"));
 		grafico.drawImage(gameOver.getImage(), 0, 0, null);
-		MainJanelas.tryAgainJ.setVisible(true);
 		Font font = new Font("Verdana", Font.BOLD, 30);
 		grafico.setColor(Color.BLACK);
 		grafico.setFont(font);
@@ -343,11 +357,13 @@ public class Fase extends JPanel implements ActionListener {
 		grafico.drawString("Inimigos mortos: " + inimigosMortos, 450, 560);
 		grafico.setFont(new Font("Verdana", Font.PLAIN, 25));
 		grafico.drawString(causeOfDeath, 150, 110);
+		grafico.setFont(new Font("Arial", Font.BOLD, 45));
+		grafico.setColor(Color.WHITE);
+		grafico.drawString("TRY AGAIN", 920 , 600);
 		
 	} else if(youWin && inGame == false) {
 		ImageIcon youWin = new ImageIcon(this.getClass().getResource("/Images/youWin.png"));
 		grafico.drawImage(youWin.getImage(), 0, 0, null);
-		MainJanelas.tryAgainJ.setVisible(true);
 		Font font = new Font("Verdana", Font.BOLD, 30);
 		grafico.setColor(Color.BLACK);
 		grafico.setFont(font);
@@ -486,7 +502,6 @@ public class Fase extends JPanel implements ActionListener {
 			}
 			
 			if(bossTime && formaNave.intersects(formaBoss1)) {
-				System.out.println("Bateu");
 				spaceShip.setAlive(false);
 				inGame = false;
 				causeOfDeath = "Você trombou direto com o Chefe, sua nave não aguentou o tranco!";

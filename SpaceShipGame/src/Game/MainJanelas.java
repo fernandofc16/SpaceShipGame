@@ -6,7 +6,6 @@ import javax.swing.JPanel;
 public class MainJanelas extends JFrame {
 	
 	public static MainJanelas mainJ;
-	public static TryAgainJanela tryAgainJ;
 	public static Fase faseJ;
 	public static SpaceShip spaceShip;
 	public static BeginJanela beginJanela;
@@ -34,13 +33,11 @@ public class MainJanelas extends JFrame {
 	}
 	
 	public void changeJPanel(JPanel jp) {
-		System.out.println("PASSOU NO CHANGEJPANEL");
 		mainJ.getContentPane().removeAll();
 		faseJ = new Fase();
-		tryAgainJ = new TryAgainJanela();
 		mainJ.getContentPane().add(faseJ);
 		validate();
-		System.out.println(faseJ.requestFocusInWindow());
+		faseJ.requestFocusInWindow();
 	}
 	
 	private static final long serialVersionUID = 3902741870615585187L;
